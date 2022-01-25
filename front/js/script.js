@@ -1,35 +1,33 @@
-// Variable CONSTANTE contenant l'adresse de l'api
+// Récupérer les produits sur l'API via le port 3000.
+const url = "http://localhost:3000/api/products/";
 
-const kanapApi = 'http://localhost:3000/api/products';
+//Fonction GET pour afficher les produits.
+function getProducts() {
+    fetch(url).then((data) =>
+        data.json()
+        .then((data) => {
+            for (let i = 0; i < data.length; i++) { //itération pour chaque produit du fichier JSON.
+                let imageUrl = data[i].imageUrl;
+                let name = data[i].name;
+                let price = data[i].price;
+                let id = data[i]._id;
+                let description = data[i].description;
+                let altTxt = data[i].altTxt;
 
-// Requête HTTP de type GET vers l'api
+                console.log(data[i]);
+                //afficher les produits via innerHTML
+                let items = `<a href="./product.html?id=${id}">
+                          <article>
+                            <img src="${imageUrl}" alt="${fetch }">
+                            <h3 class="productName">${name}</h3>
+                            <p class="productDescription">${description}</p>
+                            <p>Prix : ${price}€</p>
+                          </article>
+                        </a>`;
+                document.querySelector(".items").innerHTML += items;
+            }
+        })
+    );
+}
 
-// Delete // FETCH + Object {} + clé .THEN
-/*fetch(kanapApi)
-    .then(function(response) {
-        return response.json();
-    })*/
-
-fetch(kanapApi)
-    .then((response) => response.json())
-
-.then(function(products) {
-        console.log(products);
-        // Boucle FOR OF qui itère dans les products et les affichent sur la page avec innerHTML
-        for (let data of products) {
-            console.log(data);
-            document.getElementById(
-                "items"
-            ).innerHTML += `<a href="./product.html?id=${data._id}">
-              <article>
-               <img
-                     src="${data.imageUrl}"
-                     alt="${data.altTxt}"/>
-                 <h3 class="productName"> ${data.name}</h3>
-                 <p class="productDescription"> ${data.description}</p>
-             </article>
-         </a>`;
-        }
-    })
-    // Delete // Promise THEN CATCH -- Message d'erreur si la requête n'a pas de réponse
-    .catch((error) => console.log('Erreur : ' + err));
+getProducts();
