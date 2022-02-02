@@ -3,7 +3,7 @@ let URL_API = 'http://localhost:3000/api/products/';
 
 // Récupération de la chaîne de requête dans l'url ==> WINDOW LOCATION SEARCH
 const QUERYSTRING_URL_ID = window.location.search;
-//console.log(QUERYSTRING_URL_ID);
+console.log(QUERYSTRING_URL_ID);
 
 // Extraction de l'id ==> URL SEARCHPARAMS
 const URL_ID = new URLSearchParams(QUERYSTRING_URL_ID);
