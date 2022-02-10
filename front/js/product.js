@@ -72,11 +72,13 @@ document.querySelector('#addToCart').addEventListener('click', function(e) {
     // Les conditions pour ajouter le produit
     function ajoutPanier() {
         // Message de confirmation
-        const CONFIRMATION = alert(`Vous venez d'ajouter ${productQty} ${productName} de couleur ${productColor} dans votre panier !`);
+        const CONFIRMATION = alert(`Vous venez d'ajouter ${productQty} ${productName} de couleur ${productColor} à votre panier !`);
         // si le panier est rempli
+
         if (produitLocalStorage) {
-            // si le panier contient déjà le produit sélectionné avec la même couleur
-            const sameProduct = produitLocalStorage.find((element) => element.productId === productId && element.productColor === productColor);
+            //  HELP !!!  POURQUOI == 
+            //  si le panier contient déjà le produit sélectionné avec la même couleur 
+            const sameProduct = produitLocalStorage.find((element) => element.productId == productId & element.productColor == productColor);
             if (sameProduct) {
                 sameProduct.productQty = parseInt(productSelected.productQty) + parseInt(sameProduct.productQty);
                 localStorage.setItem("produit", JSON.stringify(produitLocalStorage));
@@ -97,13 +99,13 @@ document.querySelector('#addToCart').addEventListener('click', function(e) {
         }
     }
 
-    // Message d'alerte si couleur/quantités mal/non renseignées + si ok, rajout au panier
+    // Message d'alerte si probleme couleur / quantité = Ajout au panier si OK
     for (let i in productSelected) {
-        if (productColor === '') {
-            alert("Merci de sélectionner une couleur");
+        if (productColor == '') {
+            alert("Merci de sélectionner votre couleur !");
             break;
-        } else if (productQty == 0 || productQty > 100) {
-            alert("Merci de renseigner le nombre d'articles ! (entre 1 et 100)");
+        } else if (productQty == 0 || productQty > 99) {
+            alert("Merci de renseigner le nombre d'articles !");
             break;
         } else {
             ajoutPanier();
