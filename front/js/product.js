@@ -9,7 +9,7 @@ console.log(QUERYSTRING_URL_ID);
 const URL_ID = new URLSearchParams(QUERYSTRING_URL_ID);
 const ID = URL_ID.get('id');
 
-// Récupération de nos éléments en fonction de l'ID
+// Récupération des éléments en fonction de l'ID    --> FETCH (then catch)
 function getOneProduct() {
     fetch(URL_API + ID)
         .then(res => res.json())
@@ -43,7 +43,7 @@ document.querySelector('#addToCart').addEventListener('click', function(e) {
     let productColor = document.getElementById('colors').value;
     let productQty = document.getElementById('quantity').value;
 
-    //Récupération des éléments du product sélectionné pour le panier
+    //Récupération des éléments du produit sélectionné pour le panier
     let productSelected = {
         productId,
         productName,
@@ -69,7 +69,7 @@ document.querySelector('#addToCart').addEventListener('click', function(e) {
     */
 
 
-    // Les conditions pour ajouter le product
+    // Les conditions pour ajouter le produit
     function ajoutPanier() {
         // Message de confirmation
         const CONFIRMATION = alert(`Vous venez d'ajouter ${productQty} ${productName} de couleur ${productColor} à votre panier !`);
@@ -77,14 +77,14 @@ document.querySelector('#addToCart').addEventListener('click', function(e) {
 
         if (productLocalStorage) {
             //  HELP !!!  POURQUOI == 
-            //  si le panier contient déjà le product sélectionné avec la même couleur 
+            //  si le panier contient déjà le produit sélectionné avec la même couleur 
             const sameProduct = productLocalStorage.find((element) => element.productId == productId & element.productColor == productColor);
             if (sameProduct) {
                 sameProduct.productQty = parseInt(productSelected.productQty) + parseInt(sameProduct.productQty);
                 localStorage.setItem("product", JSON.stringify(productLocalStorage));
                 CONFIRMATION;
                 console.table(productLocalStorage);
-                // si le panier contient des products différents
+                // si le panier contient des produits différents
             } else {
                 ajoutProd();
                 CONFIRMATION;
