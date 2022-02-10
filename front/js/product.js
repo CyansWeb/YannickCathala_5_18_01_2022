@@ -43,7 +43,7 @@ document.querySelector('#addToCart').addEventListener('click', function(e) {
     let productColor = document.getElementById('colors').value;
     let productQty = document.getElementById('quantity').value;
 
-    //Récupération des éléments du produit sélectionné pour le panier
+    //Récupération des éléments du product sélectionné pour le panier
     let productSelected = {
         productId,
         productName,
@@ -55,12 +55,12 @@ document.querySelector('#addToCart').addEventListener('click', function(e) {
     };
 
     // Local Storage
-    let produitLocalStorage = JSON.parse(localStorage.getItem("produit"));
+    let productLocalStorage = JSON.parse(localStorage.getItem("product"));
 
-    // Ajout du produit
+    // Ajout du product
     function ajoutProd() {
-        produitLocalStorage.push(productSelected);
-        localStorage.setItem("produit", JSON.stringify(produitLocalStorage));
+        productLocalStorage.push(productSelected);
+        localStorage.setItem("product", JSON.stringify(productLocalStorage));
     }
 
 
@@ -69,33 +69,33 @@ document.querySelector('#addToCart').addEventListener('click', function(e) {
     */
 
 
-    // Les conditions pour ajouter le produit
+    // Les conditions pour ajouter le product
     function ajoutPanier() {
         // Message de confirmation
         const CONFIRMATION = alert(`Vous venez d'ajouter ${productQty} ${productName} de couleur ${productColor} à votre panier !`);
         // si le panier est rempli
 
-        if (produitLocalStorage) {
+        if (productLocalStorage) {
             //  HELP !!!  POURQUOI == 
-            //  si le panier contient déjà le produit sélectionné avec la même couleur 
-            const sameProduct = produitLocalStorage.find((element) => element.productId == productId & element.productColor == productColor);
+            //  si le panier contient déjà le product sélectionné avec la même couleur 
+            const sameProduct = productLocalStorage.find((element) => element.productId == productId & element.productColor == productColor);
             if (sameProduct) {
                 sameProduct.productQty = parseInt(productSelected.productQty) + parseInt(sameProduct.productQty);
-                localStorage.setItem("produit", JSON.stringify(produitLocalStorage));
+                localStorage.setItem("product", JSON.stringify(productLocalStorage));
                 CONFIRMATION;
-                console.table(produitLocalStorage);
-                // si le panier contient des produits différents
+                console.table(productLocalStorage);
+                // si le panier contient des products différents
             } else {
                 ajoutProd();
                 CONFIRMATION;
-                console.table(produitLocalStorage);
+                console.table(productLocalStorage);
             }
             // Si le panier est vide
         } else {
-            produitLocalStorage = [];
+            productLocalStorage = [];
             ajoutProd();
             CONFIRMATION;
-            console.table(produitLocalStorage);
+            console.table(productLocalStorage);
         }
     }
 
