@@ -2,9 +2,6 @@
 let produitLocalStorage = JSON.parse(localStorage.getItem("produit"));
 console.table(produitLocalStorage);
 
-// constante pour méthode reduce()
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
 
 // *************************************** Affichage du panier ***********************************************
 
