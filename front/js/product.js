@@ -42,7 +42,6 @@ document.querySelector('#addToCart').addEventListener('click', function(e) {
     let productQty = document.getElementById('quantity').value;
     let productName = document.getElementById('title').innerText;
     let productColor = document.getElementById('colors').value;
-
     //Récupération des éléments du produit sélectionné pour le panier
     let productSelected = {
         productQty,
@@ -51,15 +50,13 @@ document.querySelector('#addToCart').addEventListener('click', function(e) {
         productColor
     };
 
-    // Local Storage
+    // Stockage dans le Local Storage (sous forme de string gify)
     let produitLocalStorage = JSON.parse(localStorage.getItem("produit"));
-
     // Ajout du produit
     function ajoutProd() {
         produitLocalStorage.push(productSelected);
         localStorage.setItem("produit", JSON.stringify(produitLocalStorage));
     }
-
     // Les conditions pour ajouter le produit
     function ajoutPanier() {
         // Message de confirmation
@@ -89,16 +86,11 @@ document.querySelector('#addToCart').addEventListener('click', function(e) {
     }
 
     // Message d'alerte si couleur/quantités mal/non renseignées + si ok, rajout au panier
-    for (let i in productSelected) {
-        if (productColor === '') {
-            alert("Merci de sélectionner une couleur");
-            break;
-        } else if (productQty == 0 || productQty > 100) {
-            alert("Merci de renseigner le nombre d'articles que vous souhaitez (entre 1 et 100)");
-            break;
-        } else {
-            ajoutPanier();
-            break;
-        }
+    if (productColor === '') {
+        alert("Merci de sélectionner la couleur souhaitée");
+    } else if (productQty == 0 || productQty > 100) {
+        alert("Merci de renseigner le nombre d'articles que vous souhaitez (entre 1 et 100)");
+    } else {
+        ajoutPanier();
     }
 });

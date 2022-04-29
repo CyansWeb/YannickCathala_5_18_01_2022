@@ -2,7 +2,6 @@
 let produitLocalStorage = JSON.parse(localStorage.getItem("produit"));
 console.table(produitLocalStorage);
 
-
 // *************************************** Affichage du panier ***********************************************
 
 // *************** Affichage des produits ajoutés ***************
